@@ -1,10 +1,13 @@
 import React, {FunctionComponent, type PropsWithChildren} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import Explore from './components/Explore';
+import Header from './components/Header';
 
 const App: FunctionComponent = () => {
   return (
     <View style={styles.view}>
-      <Text style={styles.text}>Hello. This is Kalp Adhwaryu.</Text>
+      <Header />
+      <Explore />
     </View>
   );
 };
@@ -12,13 +15,9 @@ const App: FunctionComponent = () => {
 const styles = StyleSheet.create({
   view: {
     alignItems: 'center',
-    justifyContent: 'center',
     flex: 1,
-  },
-  text: {
-    color: 'blue',
-    fontSize: 20,
-    textAlign: 'center',
+    backgroundColor: 'white',
+    width: '100%',
   },
 });
 
