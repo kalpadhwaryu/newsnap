@@ -22,7 +22,6 @@ const Explore: FunctionComponent = () => {
 
 const styles = StyleSheet.create({
   exploreView: {
-    flex: 1,
     width: '100%',
     paddingHorizontal: 15,
     paddingVertical: 10,
