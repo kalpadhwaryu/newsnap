@@ -2,6 +2,7 @@ import React, {FunctionComponent, useState} from 'react';
 import {
   Image,
   Modal,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -44,13 +45,44 @@ const SingleNews: FunctionComponent<Props> = ({item}) => {
         animationType="fade"
         visible={isModalVisible}
         onRequestClose={() => setisModalVisible(!isModalVisible)}>
-        <TouchableOpacity onPress={() => setisModalVisible(!isModalVisible)}>
-          <Text>Back</Text>
-        </TouchableOpacity>
-        <View>
-          <Text>{modal.heading}</Text>
-          <Text>{modal.subheading}</Text>
-        </View>
+        <ScrollView>
+          <View style={styles.modalHeader}>
+            <TouchableOpacity
+              style={styles.modalHeaderBack}
+              onPress={() => setisModalVisible(!isModalVisible)}>
+              <Text>{`<--`}</Text>
+            </TouchableOpacity>
+            <Text style={styles.modalHeaderText}>News Post</Text>
+            <TouchableOpacity>
+              <Text>{`...`}</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.modalAuthorInfo}>
+            <Image
+              style={styles.modalAuthorImage}
+              source={{uri: `${item.authorImg}`}}
+            />
+            <View style={styles.modalAuthorNameAndSub}>
+              <Text style={styles.modalAuthorName}>{item.authorName}</Text>
+              <Text
+                style={
+                  styles.modalSubheading
+                }>{`Topic: ${item.subheading}`}</Text>
+            </View>
+          </View>
+          <View style={styles.modalMainContent}>
+            <Text style={styles.modalHeading}>{modal.heading}</Text>
+            <Image style={styles.modalImg} source={{uri: `${modal.img}`}} />
+            <Text style={styles.modalDescription}>{modal.description}</Text>
+          </View>
+          <View>
+            <Image
+              style={styles.modalIcon}
+              source={{
+                uri: 'https://cdn-icons-png.flaticon.com/512/494/494568.png',
+              }}></Image>
+          </View>
+        </ScrollView>
       </Modal>
     </TouchableOpacity>
   );
@@ -91,6 +123,67 @@ const styles = StyleSheet.create({
     width: 15,
     height: 20,
     alignSelf: 'flex-end',
+  },
+
+  // Modal Styles
+  modalHeader: {
+    flexDirection: 'row',
+    padding: 10,
+    justifyContent: 'space-between',
+  },
+  modalHeaderBack: {
+    marginRight: 10,
+    fontSize: 20,
+  },
+  modalHeaderText: {
+    color: 'black',
+    fontFamily: 'fantasy',
+    fontSize: 25,
+    textAlign: 'center',
+  },
+  modalAuthorInfo: {
+    flexDirection: 'row',
+    padding: 10,
+  },
+  modalAuthorImage: {
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    marginRight: 10,
+  },
+  modalAuthorNameAndSub: {
+    justifyContent: 'center',
+  },
+  modalAuthorName: {
+    fontSize: 15,
+    textAlignVertical: 'center',
+    color: 'black',
+  },
+  modalSubheading: {
+    fontSize: 13,
+  },
+  modalMainContent: {
+    paddingHorizontal: 10,
+    paddingBottom: 5,
+  },
+  modalHeading: {
+    fontSize: 20,
+    paddingBottom: 5,
+  },
+  modalDescription: {
+    fontSize: 16,
+  },
+  modalImg: {
+    width: '100%',
+    height: 250,
+    borderRadius: 15,
+    marginBottom: 15,
+  },
+  modalIcon: {
+    width: 15,
+    height: 20,
+    alignSelf: 'flex-end',
+    marginRight: 10,
   },
 });
 
