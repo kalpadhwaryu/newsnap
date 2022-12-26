@@ -1,14 +1,30 @@
-import React, {FunctionComponent} from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import {dataTypeInterface as Item} from '../data/data';
+import React, {FunctionComponent, useState} from 'react';
+import {
+  Image,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import data, {dataTypeInterface as Item} from '../data/data';
 
 interface Props {
   item: Item;
 }
 
 const SingleNews: FunctionComponent<Props> = ({item}) => {
+  const [isModalVisible, setisModalVisible] = useState(false);
+  const [modal, setModal] = useState(data[0]);
+  const onPressItem = (item: Item) => {
+    setisModalVisible(true);
+    setModal(item);
+  };
+
   return (
-    <View style={styles.singleNews}>
+    <TouchableOpacity
+      style={styles.singleNews}
+      onPress={() => onPressItem(item)}>
       <View style={styles.authorInfo}>
         <Image style={styles.authorImage} source={{uri: `${item.authorImg}`}} />
         <Text style={styles.authorName}>{item.authorName}</Text>
@@ -24,7 +40,19 @@ const SingleNews: FunctionComponent<Props> = ({item}) => {
             uri: 'https://cdn-icons-png.flaticon.com/512/494/494568.png',
           }}></Image>
       </View>
-    </View>
+      <Modal
+        animationType="fade"
+        visible={isModalVisible}
+        onRequestClose={() => setisModalVisible(!isModalVisible)}>
+        <TouchableOpacity onPress={() => setisModalVisible(!isModalVisible)}>
+          <Text>Back</Text>
+        </TouchableOpacity>
+        <View>
+          <Text>{modal.heading}</Text>
+          <Text>{modal.subheading}</Text>
+        </View>
+      </Modal>
+    </TouchableOpacity>
   );
 };
 
