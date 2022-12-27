@@ -1,5 +1,6 @@
 import React, {FunctionComponent, useState} from 'react';
 import {
+  Alert,
   Image,
   Modal,
   ScrollView,
@@ -9,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import data, {dataTypeInterface as Item} from '../data/data';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface Props {
   item: Item;
@@ -33,14 +35,19 @@ const SingleNews: FunctionComponent<Props> = ({item}) => {
       <Image style={styles.image} source={{uri: `${item.img}`}} />
       <Text style={styles.heading}>{item.heading}</Text>
       <Text style={styles.subheading}>{item.subheading}</Text>
-      <Text style={styles.description}>{item.description}</Text>
-      <View>
-        <Image
+      <Text style={styles.description}>
+        {item.description.length > 50
+          ? item.description.slice(0, 50) + '...'
+          : item.description}
+      </Text>
+      <TouchableOpacity onPress={() => Alert.alert('Bookmark added')}>
+        <Icon
+          name="bookmark-outline"
+          size={20}
+          color="#000"
           style={styles.icon}
-          source={{
-            uri: 'https://cdn-icons-png.flaticon.com/512/494/494568.png',
-          }}></Image>
-      </View>
+        />
+      </TouchableOpacity>
       <Modal
         animationType="fade"
         visible={isModalVisible}
@@ -50,11 +57,13 @@ const SingleNews: FunctionComponent<Props> = ({item}) => {
             <TouchableOpacity
               style={styles.modalHeaderBack}
               onPress={() => setisModalVisible(!isModalVisible)}>
-              <Text>{`<--`}</Text>
+              <Icon name="arrow-back" size={25} color="#000" />
             </TouchableOpacity>
             <Text style={styles.modalHeaderText}>News Post</Text>
-            <TouchableOpacity>
-              <Text>{`...`}</Text>
+            <TouchableOpacity
+              style={styles.modalHeaderDots}
+              onPress={() => Alert.alert('Options clicked')}>
+              <Icon name="ellipsis-horizontal-sharp" size={25} color="#000" />
             </TouchableOpacity>
           </View>
           <View style={styles.modalAuthorInfo}>
@@ -75,13 +84,14 @@ const SingleNews: FunctionComponent<Props> = ({item}) => {
             <Image style={styles.modalImg} source={{uri: `${modal.img}`}} />
             <Text style={styles.modalDescription}>{modal.description}</Text>
           </View>
-          <View>
-            <Image
-              style={styles.modalIcon}
-              source={{
-                uri: 'https://cdn-icons-png.flaticon.com/512/494/494568.png',
-              }}></Image>
-          </View>
+          <TouchableOpacity onPress={() => Alert.alert('Bookmark added')}>
+            <Icon
+              name="bookmark-outline"
+              size={20}
+              color="#000"
+              style={styles.modalBookmarkIcon}
+            />
+          </TouchableOpacity>
         </ScrollView>
       </Modal>
     </TouchableOpacity>
@@ -120,8 +130,6 @@ const styles = StyleSheet.create({
   subheading: {paddingBottom: 5, color: 'grey', fontSize: 15},
   description: {paddingBottom: 5, color: 'black'},
   icon: {
-    width: 15,
-    height: 20,
     alignSelf: 'flex-end',
   },
 
@@ -133,13 +141,16 @@ const styles = StyleSheet.create({
   },
   modalHeaderBack: {
     marginRight: 10,
-    fontSize: 20,
+    justifyContent: 'center',
   },
   modalHeaderText: {
     color: 'black',
     fontFamily: 'fantasy',
     fontSize: 25,
     textAlign: 'center',
+  },
+  modalHeaderDots: {
+    justifyContent: 'center',
   },
   modalAuthorInfo: {
     flexDirection: 'row',
@@ -153,6 +164,7 @@ const styles = StyleSheet.create({
   },
   modalAuthorNameAndSub: {
     justifyContent: 'center',
+    paddingHorizontal: 5,
   },
   modalAuthorName: {
     fontSize: 15,
@@ -161,6 +173,7 @@ const styles = StyleSheet.create({
   },
   modalSubheading: {
     fontSize: 13,
+    color: 'grey',
   },
   modalMainContent: {
     paddingHorizontal: 10,
@@ -169,9 +182,12 @@ const styles = StyleSheet.create({
   modalHeading: {
     fontSize: 20,
     paddingBottom: 5,
+    color: 'black',
+    fontWeight: 'bold',
   },
   modalDescription: {
     fontSize: 16,
+    color: 'black',
   },
   modalImg: {
     width: '100%',
@@ -179,11 +195,10 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginBottom: 15,
   },
-  modalIcon: {
-    width: 15,
-    height: 20,
+  modalBookmarkIcon: {
     alignSelf: 'flex-end',
     marginRight: 10,
+    paddingBottom: 10,
   },
 });
 
