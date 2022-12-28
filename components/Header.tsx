@@ -1,25 +1,15 @@
 import React, {FunctionComponent, type PropsWithChildren} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
+import tw from 'tailwind-react-native-classnames';
 
 const Header: FunctionComponent = () => {
   return (
-    <View style={styles.header}>
-      <Text style={styles.text}>Newsnap</Text>
+    <View style={[tw`p-2 w-full`]}>
+      <Text style={[tw`font-mono text-3xl text-black text-center`]}>
+        Newsnap
+      </Text>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  header: {
-    padding: 10,
-    width: '100%',
-  },
-  text: {
-    fontFamily: 'fantasy',
-    fontSize: 28,
-    color: 'black',
-    textAlign: 'center',
-  },
-});
 
 export default Header;

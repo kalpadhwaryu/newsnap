@@ -1,53 +1,28 @@
 import React, {FunctionComponent} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
+import tw from 'tailwind-react-native-classnames';
 
 const Explore: FunctionComponent = () => {
   return (
-    <View style={styles.exploreView}>
-      <Text style={styles.exploreText}>Explore</Text>
-      <View style={styles.exploreInternalView}>
-        <TouchableOpacity style={styles.touchable}>
-          <Text style={styles.touchableText}>National</Text>
+    <View style={[tw`w-full px-3 py-2`]}>
+      <Text style={[tw`text-left text-xl text-black font-mono pb-1.5`]}>
+        Explore
+      </Text>
+      <View style={[tw`flex-row justify-between`]}>
+        <TouchableOpacity style={[tw`px-4 py-1 bg-gray-200 rounded-2xl`]}>
+          <Text style={[tw`text-black font-mono text-base`]}>National</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.touchable}>
-          <Text style={styles.touchableText}>International</Text>
+        <TouchableOpacity style={[tw`px-4 py-1 bg-gray-200 rounded-2xl`]}>
+          <Text style={[tw`text-black font-mono text-base`]}>
+            International
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.touchable}>
-          <Text style={styles.touchableText}>Politics</Text>
+        <TouchableOpacity style={[tw`px-4 py-1 bg-gray-200 rounded-2xl`]}>
+          <Text style={[tw`text-black font-mono text-base`]}>Politics</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  exploreView: {
-    width: '100%',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-  },
-  exploreText: {
-    textAlign: 'left',
-    fontSize: 20,
-    color: 'black',
-    paddingBottom: 10,
-    fontFamily: 'fantasy',
-  },
-  exploreInternalView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  touchable: {
-    paddingHorizontal: 20,
-    paddingVertical: 5,
-    backgroundColor: '#EEEEEE',
-    borderRadius: 15,
-    borderWidth: 0.5,
-  },
-  touchableText: {
-    color: 'black',
-    fontFamily: 'fantasy',
-  },
-});
 
 export default Explore;
