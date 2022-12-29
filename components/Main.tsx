@@ -7,7 +7,7 @@ import tw from 'tailwind-react-native-classnames';
 const Main: FunctionComponent = () => {
   return (
     <FlatList
-      style={[tw`px-3 py-1`]}
+      style={[tw`px-2 py-1`]}
       data={data}
       renderItem={({item}) => <SingleNews item={item} />}
     />

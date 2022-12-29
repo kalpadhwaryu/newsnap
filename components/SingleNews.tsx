@@ -4,13 +4,13 @@ import {
   Image,
   Modal,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import data, {dataTypeInterface as Item} from '../data/data';
 import Icon from 'react-native-vector-icons/Ionicons';
+import tw from 'tailwind-react-native-classnames';
 
 interface Props {
   item: Item;
@@ -26,16 +26,24 @@ const SingleNews: FunctionComponent<Props> = ({item}) => {
 
   return (
     <TouchableOpacity
-      style={styles.singleNews}
+      style={[tw`px-2 py-2 mb-3 border border-gray-400 rounded-xl`]}
       onPress={() => onPressItem(item)}>
-      <View style={styles.authorInfo}>
-        <Image style={styles.authorImage} source={{uri: `${item.authorImg}`}} />
-        <Text style={styles.authorName}>{item.authorName}</Text>
+      <View style={[tw`flex-row pb-1 items-center`]}>
+        <Image
+          style={[tw`h-7 w-7 rounded-2xl mr-1`]}
+          source={{uri: `${item.authorImg}`}}
+        />
+        <Text style={[tw`text-black`]}>{item.authorName}</Text>
       </View>
-      <Image style={styles.image} source={{uri: `${item.img}`}} />
-      <Text style={styles.heading}>{item.heading}</Text>
-      <Text style={styles.subheading}>{item.subheading}</Text>
-      <Text style={styles.description}>
+      <Image
+        style={[tw`w-full h-36 mb-1 rounded-xl`]}
+        source={{uri: `${item.img}`}}
+      />
+      <Text style={[tw`pb-1 text-black font-bold text-lg`]}>
+        {item.heading}
+      </Text>
+      <Text style={[tw`pb-1 text-gray-500`]}>{item.subheading}</Text>
+      <Text style={[tw`pb-1 text-black`]}>
         {item.description.length > 50
           ? item.description.slice(0, 50) + '...'
           : item.description}
@@ -45,7 +53,7 @@ const SingleNews: FunctionComponent<Props> = ({item}) => {
           name="bookmark-outline"
           size={20}
           color="#000"
-          style={styles.icon}
+          style={[tw`self-end`]}
         />
       </TouchableOpacity>
       <Modal
@@ -53,43 +61,48 @@ const SingleNews: FunctionComponent<Props> = ({item}) => {
         visible={isModalVisible}
         onRequestClose={() => setisModalVisible(!isModalVisible)}>
         <ScrollView>
-          <View style={styles.modalHeader}>
+          <View style={[tw`flex-row p-2 justify-between`]}>
             <TouchableOpacity
-              style={styles.modalHeaderBack}
+              style={[tw`justify-center`]}
               onPress={() => setisModalVisible(!isModalVisible)}>
               <Icon name="arrow-back" size={25} color="#000" />
             </TouchableOpacity>
-            <Text style={styles.modalHeaderText}>News Post</Text>
+            <Text style={[tw`text-black text-center text-2xl`]}>News Post</Text>
             <TouchableOpacity
-              style={styles.modalHeaderDots}
+              style={[tw`justify-center`]}
               onPress={() => Alert.alert('Options clicked')}>
               <Icon name="ellipsis-horizontal-sharp" size={25} color="#000" />
             </TouchableOpacity>
           </View>
-          <View style={styles.modalAuthorInfo}>
+          <View style={[tw`px-2.5 py-1 flex-row`]}>
             <Image
-              style={styles.modalAuthorImage}
-              source={{uri: `${item.authorImg}`}}
+              style={[tw`h-12 w-12 rounded-3xl mr-1`]}
+              source={{uri: `${modal.authorImg}`}}
             />
-            <View style={styles.modalAuthorNameAndSub}>
-              <Text style={styles.modalAuthorName}>{item.authorName}</Text>
+            <View style={[tw`justify-center px-1`]}>
+              <Text style={[tw`text-black text-base`]}>{modal.authorName}</Text>
               <Text
-                style={
-                  styles.modalSubheading
-                }>{`Topic: ${item.subheading}`}</Text>
+                style={[
+                  tw`text-gray-600 text-sm`,
+                ]}>{`Topic: ${modal.subheading}`}</Text>
             </View>
           </View>
-          <View style={styles.modalMainContent}>
-            <Text style={styles.modalHeading}>{modal.heading}</Text>
-            <Image style={styles.modalImg} source={{uri: `${modal.img}`}} />
-            <Text style={styles.modalDescription}>{modal.description}</Text>
+          <View style={[tw`px-2.5 pb-1`]}>
+            <Text style={[tw`text-black font-bold text-xl pb-2`]}>
+              {modal.heading}
+            </Text>
+            <Image
+              style={[tw`w-full h-56 mb-2 rounded-xl`]}
+              source={{uri: `${modal.img}`}}
+            />
+            <Text style={[tw`text-black text-base`]}>{modal.description}</Text>
           </View>
           <TouchableOpacity onPress={() => Alert.alert('Bookmark added')}>
             <Icon
               name="bookmark-outline"
               size={20}
               color="#000"
-              style={styles.modalBookmarkIcon}
+              style={[tw`self-end mr-2 pb-2`]}
             />
           </TouchableOpacity>
         </ScrollView>
@@ -97,109 +110,5 @@ const SingleNews: FunctionComponent<Props> = ({item}) => {
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  singleNews: {
-    padding: 10,
-    marginBottom: 20,
-    borderColor: 'grey',
-    borderWidth: 0.7,
-    borderRadius: 15,
-  },
-  authorInfo: {
-    flexDirection: 'row',
-    paddingBottom: 5,
-  },
-  authorImage: {
-    height: 28,
-    width: 28,
-    borderRadius: 15,
-    marginRight: 5,
-  },
-  authorName: {
-    fontSize: 13,
-    textAlignVertical: 'center',
-    color: 'black',
-  },
-  image: {
-    height: 70,
-    width: '100%',
-    marginBottom: 5,
-  },
-  heading: {paddingBottom: 5, color: 'black', fontWeight: 'bold', fontSize: 19},
-  subheading: {paddingBottom: 5, color: 'grey', fontSize: 15},
-  description: {paddingBottom: 5, color: 'black'},
-  icon: {
-    alignSelf: 'flex-end',
-  },
-
-  // Modal Styles
-  modalHeader: {
-    flexDirection: 'row',
-    padding: 10,
-    justifyContent: 'space-between',
-  },
-  modalHeaderBack: {
-    marginRight: 10,
-    justifyContent: 'center',
-  },
-  modalHeaderText: {
-    color: 'black',
-    fontFamily: 'fantasy',
-    fontSize: 25,
-    textAlign: 'center',
-  },
-  modalHeaderDots: {
-    justifyContent: 'center',
-  },
-  modalAuthorInfo: {
-    flexDirection: 'row',
-    padding: 10,
-  },
-  modalAuthorImage: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-    marginRight: 10,
-  },
-  modalAuthorNameAndSub: {
-    justifyContent: 'center',
-    paddingHorizontal: 5,
-  },
-  modalAuthorName: {
-    fontSize: 15,
-    textAlignVertical: 'center',
-    color: 'black',
-  },
-  modalSubheading: {
-    fontSize: 13,
-    color: 'grey',
-  },
-  modalMainContent: {
-    paddingHorizontal: 10,
-    paddingBottom: 5,
-  },
-  modalHeading: {
-    fontSize: 20,
-    paddingBottom: 5,
-    color: 'black',
-    fontWeight: 'bold',
-  },
-  modalDescription: {
-    fontSize: 16,
-    color: 'black',
-  },
-  modalImg: {
-    width: '100%',
-    height: 250,
-    borderRadius: 15,
-    marginBottom: 15,
-  },
-  modalBookmarkIcon: {
-    alignSelf: 'flex-end',
-    marginRight: 10,
-    paddingBottom: 10,
-  },
-});
 
 export default SingleNews;

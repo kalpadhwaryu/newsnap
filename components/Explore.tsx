@@ -4,7 +4,7 @@ import tw from 'tailwind-react-native-classnames';
 
 const Explore: FunctionComponent = () => {
   return (
-    <View style={[tw`w-full px-3 py-2`]}>
+    <View style={[tw`w-full px-2.5 pb-2`]}>
       <Text style={[tw`text-left text-xl text-black font-mono pb-1.5`]}>
         Explore
       </Text>
