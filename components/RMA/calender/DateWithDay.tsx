@@ -13,7 +13,7 @@ interface DateWithDay {
 
 const DateWithDay: FunctionComponent<DateWithDay> = ({oneDateWithDay}) => {
   return (
-    <View style={[tw`text-center border rounded-xl w-12 mx-3 py-3`]}>
+    <View style={[tw`text-center border rounded-xl w-12 mx-3 py-2`]}>
       <TouchableOpacity>
         <Text style={[tw`text-center text-black font-bold`]}>
           {oneDateWithDay.date}

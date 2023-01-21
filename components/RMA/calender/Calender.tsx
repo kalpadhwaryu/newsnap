@@ -27,7 +27,7 @@ const Calender = () => {
     {date: 24, day: 'Tue'},
   ];
   return (
-    <View style={[tw`px-3 py-1 mb-2`]}>
+    <View style={[tw`px-3 py-1 mb-1`]}>
       <View style={[tw`mb-2`]}>
         <Dropdown
           style={[tw`w-28 text-black`]}
