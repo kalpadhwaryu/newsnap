@@ -36,7 +36,7 @@ const Calender = () => {
           maxHeight={300}
           labelField="label"
           valueField="value"
-          placeholder="Select item"
+          placeholder="January"
           onChange={item => console.log(item)}
         />
       </View>

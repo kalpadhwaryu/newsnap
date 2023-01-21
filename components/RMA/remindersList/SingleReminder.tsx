@@ -24,7 +24,7 @@ const SingleReminder: FunctionComponent<Reminder> = ({reminder}) => {
     <View
       style={[tw`px-2 mb-2 ml-2 flex flex-row justify-between items-center`]}>
       <View>
-        <Text style={[tw`text-black`]}>{reminder.text}</Text>
+        <Text style={[tw`text-black font-bold`]}>{reminder.text}</Text>
         <Text style={[tw`text-black`]}>{reminder.startTime}</Text>
         <Text style={[tw`text-black`]}>{reminder.repeatInfo}</Text>
         <View style={[tw`flex flex-row mt-1`]}>
@@ -34,7 +34,7 @@ const SingleReminder: FunctionComponent<Reminder> = ({reminder}) => {
         </View>
       </View>
       <TouchableOpacity>
-        <View style={[tw`border rounded-xl p-3 mr-2`]}>
+        <View style={[tw`border rounded-xl p-3 mr-2 bg-yellow-300`]}>
           <Image style={[tw`h-5 w-7`]} source={checkmark} />
         </View>
       </TouchableOpacity>

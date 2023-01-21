@@ -13,7 +13,6 @@ const RemindersList = () => {
     {label: 'Category 2', value: 'category2'},
     {label: 'Category 3', value: 'category3'},
   ];
-  console.log('Type of discord is ' + typeof discord);
 
   const reminderOfParticularDay = [
     {
